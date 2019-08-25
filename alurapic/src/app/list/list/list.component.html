@@ -1,0 +1,41 @@
+<div class="ml-2">
+    <table class="table table-sm">
+        <tr>
+            <th *ngFor="let item of header">
+                <div class="column" (click)="orderBy(item.id, item.asc)">
+                    <label>{{ item.name }}</label>
+                    <i class="icon-order ml-2 fa"
+                        [ngClass]="{ 'fa-caret-up': item.asc, 'fa-caret-down': !item.asc }"></i>
+                </div>
+
+                <div>
+                    <div class="input-group-append" *ngIf="isInput(item.type); else select">
+                        <select class="form-control" [(ngModel)]="item.filter.type" (change)="onChangeFilter()">
+                            <option *ngFor="let filter of item.filters" [value]="filter.key">
+                                {{ filter.name }}
+                            </option>
+                        </select>
+                        <input class="form-control" [(ngModel)]="item.filter.value" (change)="onChangeFilter()">
+                    </div>
+
+                    <ng-template #select>
+                        <select class="form-control" [(ngModel)]="item.filter.value" (change)="onChangeFilter()">
+                            <option>teste filtro</option>
+                            <option>teste filtro 2</option>
+                        </select>
+                    </ng-template>
+                </div>
+            </th>
+        </tr>
+    </table>
+
+    <table mat-table [dataSource]="items" class="table table-hover table-sm">
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column">
+            <td mat-cell *matCellDef="let item"> {{ getValue(item[column], column) }} </td>
+        </ng-container>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+
+    <br>
+    <button class="ml-2" type="button" class="btn btn-primary" (click)="getFilters()">filters</button>
+</div>

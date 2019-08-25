@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+}
+
+td {       
+    padding-top: 10px !important;
+}
+
+.icon-order {
+    color: rgb(42, 92, 228);
+}
+
+.column {
+    cursor: pointer;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+    border-color: #dee2e6;
+    padding: 0;
+}
